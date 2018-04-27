@@ -29,6 +29,10 @@ client.on('ready', () => {
 
 client.on('message', message => {
 
+	// Return if message if from the bot
+	if (message.author.bot) return;
+
+	// Messages
 	if (message.content.toLowerCase() == 'wat') {
 		message.channel.send('wot');
 	}
