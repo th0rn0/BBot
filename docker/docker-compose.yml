@@ -1,0 +1,27 @@
+version: "3.4"
+services:
+  bbot:
+    build:
+      context: ./bbot
+      dockerfile: bbot.dockerfile
+    working_dir: /var/www
+    volumes:
+      - ../src:/home/node/app
+    env_file: ../src/.env
+    container_name: bbot
+    ports:
+        - "8888:8888"
+    command: "npm start"
+  database:
+    build:
+      context: ./database
+      dockerfile: database.dockerfile
+    volumes:
+      - database:/var/lib/mysql
+    env_file: ../src/.env
+    ports:
+        - "3306:3306"
+    container_name: bbot_db
+volumes:
+  database:
+    name: bbot_db
